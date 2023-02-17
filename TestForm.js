@@ -27,21 +27,30 @@ export default function TestForm()
         console.log(event.target.name)
         console.log('test')
         console.log(form)
-        let {email,username}=form
+        let {email,fname,lname,is_mentor,rank}=form
         formData.append('email',email)
-        formData.append('username',username)
-        axios.post('http://127.0.0.1:8000/login/',formData,{headers:{
+        formData.append('fname',fname)
+        formData.append('lname',lname)
+        // formData.append('is_mentor',is_mentor)
+        formData.append('rank',rank)
+        axios.put('http://127.0.0.1:8000/update/',formData,{headers:{
             "content-type": "multipart/form-data",
         }}).then((response)=>setRes(response))
     }
     return(
         <form onSubmit={formSend}>
+            Email
             <input type='email' name='email' onChange={handleChange}></input>
-            <input type='text' name='username' onChange={handleChange}></input>
+            fname
+            <input type='text' name='fname' onChange={handleChange}></input>
+            lname
+            <input type='text' name='lname' onChange={handleChange}></input>
+            mentor
+            <input type='checkbox' name='is_mentor' onChange={handleChange}></input>
+            rank
+            <input type='text' name='rank' onChange={handleChange}></input>
             Photo
             <input type='file' name='photo' onChange={handleFileChange}></input>
-            PDF
-            <input type='file' name='pdf' onChange={handleFileChange}></input>
             <input type='button' onClick={formSend}></input>
             <input type='submit'></input>
         </form>
